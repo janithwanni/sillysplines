@@ -1,0 +1,14 @@
+# (uncomment to add a dependency)
+# dependencies:
+#  - name:
+#    version:
+#    src:
+#    script:
+#    stylesheet:
+
+dependencies:
+ - name: sillysplines
+   version: 0.0.1.9000
+   src: "htmlwidgets/sillysplines"
+   script: "sillysplines.min.js"
+   stylesheet: "sillysplines.min.css"

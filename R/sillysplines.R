@@ -1,15 +1,24 @@
-#' <Add Title>
+#' Create a box to draw silly spline
 #'
-#' <Add Description>
+#' This creates a simple htmlwidget to be used
+#'
+#' @param initial The initial set of coordinates used to draw the spline, needs to be sorted by x axis
+#' @param width width of container in pixels
+#' @param height height of container in pixels
+#' @param elementId The id to be used for the container element
 #'
 #' @import htmlwidgets
 #'
 #' @export
-sillysplines <- function(message, width = NULL, height = NULL, elementId = NULL) {
-
+sillysplines <- function(
+  initial,
+  width = NULL,
+  height = NULL,
+  elementId = NULL
+) {
   # forward options using x
   x = list(
-    message = message
+    message = initial
   )
 
   # create widget
@@ -40,13 +49,29 @@ sillysplines <- function(message, width = NULL, height = NULL, elementId = NULL)
 #' @name sillysplines-shiny
 #'
 #' @export
-sillysplinesOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'sillysplines', width, height, package = 'sillysplines')
+sillysplinesOutput <- function(outputId, width = '100%', height = '400px') {
+  htmlwidgets::shinyWidgetOutput(
+    outputId,
+    'sillysplines',
+    width,
+    height,
+    package = 'sillysplines'
+  )
 }
 
 #' @rdname sillysplines-shiny
 #' @export
 renderSillysplines <- function(expr, env = parent.frame(), quoted = FALSE) {
-  if (!quoted) { expr <- substitute(expr) } # force quoted
+  if (!quoted) {
+    expr <- substitute(expr)
+  } # force quoted
   htmlwidgets::shinyRenderWidget(expr, sillysplinesOutput, env, quoted = TRUE)
+}
+
+sillysplines_html <- function(...) {
+  htmltools::tags$div(
+    ...,
+    id = "app",
+    style = "display: flex; justify-content: center; align-items: center; width: 50%; flex-direction: column;"
+  )
 }

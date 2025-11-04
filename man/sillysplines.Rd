@@ -2,14 +2,19 @@
 % Please edit documentation in R/sillysplines.R
 \name{sillysplines}
 \alias{sillysplines}
-\title{\if{html}{\out{
-<Add Title>
-}}}
+\title{Create a box to draw silly spline}
 \usage{
-sillysplines(message, width = NULL, height = NULL, elementId = NULL)
+sillysplines(initial, width = NULL, height = NULL, elementId = NULL)
+}
+\arguments{
+\item{initial}{The initial set of coordinates used to draw the spline, needs to be sorted by x axis}
+
+\item{width}{width of container in pixels}
+
+\item{height}{height of container in pixels}
+
+\item{elementId}{The id to be used for the container element}
 }
 \description{
-\if{html}{\out{
-<Add Description>
-}}
+This creates a simple htmlwidget to be used
 }

@@ -41,7 +41,11 @@
 #'
 #' @importFrom jsonlite fromJSON
 #' @export
-create_data <- function(coord = NULL, coord_filepath = NULL, n_samples = 1000) {
+create_data <- function(
+  coord_filepath = NULL,
+  coord = NULL,
+  n_samples = 10000
+) {
   # Load coordinates from file or object
   if (!is.null(coord_filepath)) {
     if (!file.exists(coord_filepath)) {
@@ -76,7 +80,7 @@ create_data <- function(coord = NULL, coord_filepath = NULL, n_samples = 1000) {
 
   # Compute class: above the boundary == 1
   boundary_y <- boundary_fn(df$x)
-  df$class <- as.integer(df$y > boundary_y)
+  df$class <- ifelse(df$y > boundary_y, "Above", "Below")
 
   return(df)
 }

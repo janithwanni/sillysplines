@@ -38,7 +38,7 @@ describe("create_data() with piecewise decision boundary", {
       rule = 2
     )
 
-    expected_class <- as.integer(df$y > boundary_fn(df$x))
+    expected_class <- ifelse(df$y > boundary_fn(df$x), "Above", "Below")
 
     expect_identical(df$class, expected_class)
   })

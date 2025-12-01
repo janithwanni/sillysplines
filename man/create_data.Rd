@@ -4,15 +4,15 @@
 \alias{create_data}
 \title{Create a 2D Synthetic Dataset With Class Labels}
 \usage{
-create_data(coord = NULL, coord_filepath = NULL, n_samples = 1000)
+create_data(coord_filepath = NULL, coord = NULL, n_samples = 10000)
 }
 \arguments{
-\item{coord}{A matrix or data frame with two columns (x and y) specifying
-threshold coordinates. Optional if \code{coord_filepath} is supplied.}
-
 \item{coord_filepath}{A character string specifying a file path to a JSON
 file containing a list/array of coordinate pairs. Optional if \code{coord} is
 supplied.}
+
+\item{coord}{A matrix or data frame with two columns (x and y) specifying
+threshold coordinates. Optional if \code{coord_filepath} is supplied.}
 
 \item{n_samples}{Integer; number of synthetic 2D points to generate.}
 }

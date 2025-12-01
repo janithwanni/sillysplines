@@ -4,11 +4,9 @@
 \alias{sillysplines}
 \title{Create a box to draw silly spline}
 \usage{
-sillysplines(initial, width = NULL, height = NULL, elementId = NULL)
+sillysplines(width = 640, height = 640, elementId = "app")
 }
 \arguments{
-\item{initial}{The initial set of coordinates used to draw the spline, needs to be sorted by x axis}
-
 \item{width}{width of container in pixels}
 
 \item{height}{height of container in pixels}

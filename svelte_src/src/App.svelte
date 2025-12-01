@@ -1,10 +1,11 @@
 <script>
 import {onMount} from "svelte";
 import * as d3 from "d3"
-let width = 640;
-let height = 640;
+const props = $props();
+let width = props.width ?? 640;
+let height = props.height ?? 640;
 const svgBounds = {xMin:0, yMin:0, xMax: width, yMax: height}
-const targetBounds = {xMin: -10, yMin: -10, xMax: 10, yMax: 10}
+const targetBounds = {xMin: -1, yMin: -1, xMax: 1, yMax: 1}
 const scale = (x, domMin, domMax, ranMin, ranMax) => {
   return ((x - domMin) / (domMax - domMin)) * (ranMax - ranMin) + ranMin
 }
@@ -190,9 +191,22 @@ const handleDownload = function(event) {
   const coords = JSON.stringify(translateCoords($state.snapshot(points))) 
   console.log(coords)
   if (typeof Shiny  !== "undefined") {
-  Shiny.setInputValue("svelte_data", coords, { priority: "event" });
-  Shiny.setInputValue("app-primary-svelte_data", coords, { priority: "event" });
-    }
+    Shiny.setInputValue("svelte_data", coords, { priority: "event" });
+    Shiny.setInputValue("app-primary-svelte_data", coords, { priority: "event" });
+  }
+  const jsonstr = JSON.stringify(translateCoords($state.snapshot(points)))
+  const blob = new Blob([jsonstr], {type: 'application/json'})
+  const link = document.createElement("a")
+  link.download = "coords.json"
+  link.href = window.URL.createObjectURL(blob)
+  link.dataset.downloadurl = ["text/json", link.download, link.href].join(":");
+  const evt = new MouseEvent("click", {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+  });
+  link.dispatchEvent(evt);
+  link.remove()
 }
 
 </script>
@@ -200,18 +214,6 @@ const handleDownload = function(event) {
 <div bind:this={container} style={`border: 1px solid black; width: 100%; aspect-ratio: ${height}/${width}`}>
 </div>
 <div style="width: 100%; padding-top: 1em; display: flex; justify-content: center; align-items: center">
-<!-- <input style="padding: 1em; color: white; background-color: black; border-radius: 1em"  type="button" value="Load boundary" id = "load_bounds" onclick={handleDownload}/> -->
+  <input style="padding: 1em; color: white; background-color: black; border-radius: 1em"  type="button" value="Download boundary" id = "load_bounds" onclick={handleDownload}/>
 </div>
 
-<style>
-svg[tabindex] {
-    display:block;
-    margin: 0 -14px;
-    border: solid 2px transparent;
-}
-
-svg[tabindex]:focus {
-    outline: none;
-    border: solid 2px lightblue;
-}
-</style>

@@ -6,10 +6,14 @@ export default defineConfig({
   plugins: [svelte()],
   build: {
     outDir: "../inst/htmlwidgets/sillysplines",
+    emptyOutDir: true,
     lib: {
       name: "sillysplines",
-      entry: ["src/App.svelte"],
-      fileName: "sillysplines.min",
+      entry: ["src/main.js"],
+      formats: ["umd", "iife"],
+      minify: false,
+      fileName: (format, entryName) =>
+        `sillysplines.min.${format == "umd" ? "umd.js" : "js"}`,
       cssFileName: "sillysplines.min",
     },
   },

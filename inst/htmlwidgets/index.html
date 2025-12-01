@@ -8,12 +8,20 @@
   <body>
     <div><h1>The squiggle tool</h1></div>
     <br />
-    <div class="squiggle_container">
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      "
+    >
       <div id="elemId"></div>
     </div>
-    <script type="module" src="/src/main.js"></script>
+    <script src="sillysplines/sillysplines.min.js"></script>
+    <!-- <script src="sillysplines/sillysplines.min.umd.js"></script> -->
     <script>
-      squiggle("#elemId");
+      sillysplines("elemId");
     </script>
   </body>
 </html>

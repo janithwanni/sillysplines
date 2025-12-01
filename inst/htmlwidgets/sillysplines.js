@@ -8,9 +8,10 @@ HTMLWidgets.widget({
 
     return {
       renderValue: function (x) {
-        // TODO: code to render the widget, e.g.
+        console.log("About to render widget");
         console.log(x);
-        el.innerHTML = x;
+        // TODO: code to render the widget, e.g.
+        sillysplines(x.target, x.props);
       },
 
       resize: function (width, height) {

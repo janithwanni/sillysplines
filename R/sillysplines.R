@@ -2,7 +2,6 @@
 #'
 #' This creates a simple htmlwidget to be used
 #'
-#' @param initial The initial set of coordinates used to draw the spline, needs to be sorted by x axis
 #' @param width width of container in pixels
 #' @param height height of container in pixels
 #' @param elementId The id to be used for the container element
@@ -11,14 +10,29 @@
 #'
 #' @export
 sillysplines <- function(
-  initial,
-  width = NULL,
-  height = NULL,
-  elementId = NULL
+  width = 640,
+  height = 640,
+  elementId = "app"
 ) {
   # forward options using x
   x = list(
-    message = initial
+    target = elementId,
+    props = list(
+      width = width,
+      height = height,
+      elementId = elementId,
+      # TODO: Not yet implemented
+      lowerRegionColor = "lightblue",
+      lowerRegionOpacity = 0.5,
+      upperRegionColor = "lightcoral",
+      upperRegionOpacity = 0.5
+    )
+    # TODO: Future props to add
+    # lower region color, opacity
+    # upper region color, opacity
+    # spline color, stroke-width
+    # point color, radius, toAnimate, highlightColor
+    # showDownload
   )
 
   # create widget
@@ -71,7 +85,6 @@ renderSillysplines <- function(expr, env = parent.frame(), quoted = FALSE) {
 sillysplines_html <- function(...) {
   htmltools::tags$div(
     ...,
-    id = "app",
-    style = "display: flex; justify-content: center; align-items: center; width: 50%; flex-direction: column;"
+    style = "display: flex; justify-content: center; align-items: center; flex-direction: column;"
   )
 }

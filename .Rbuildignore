@@ -2,3 +2,5 @@
 ^renv\.lock$
 ^svelte_src$
 ^LICENSE\.md$
+^adr.md$
+^.*\.sh$

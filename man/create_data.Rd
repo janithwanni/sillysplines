@@ -4,7 +4,12 @@
 \alias{create_data}
 \title{Create a 2D Synthetic Dataset With Class Labels}
 \usage{
-create_data(coord_filepath = NULL, coord = NULL, n_samples = 10000)
+create_data(
+  coord_filepath = NULL,
+  coord = NULL,
+  n_samples = 10000,
+  seed = 1835
+)
 }
 \arguments{
 \item{coord_filepath}{A character string specifying a file path to a JSON
@@ -15,6 +20,8 @@ supplied.}
 threshold coordinates. Optional if \code{coord_filepath} is supplied.}
 
 \item{n_samples}{Integer; number of synthetic 2D points to generate.}
+
+\item{seed}{Integer; Random seed to be used for generating dataset}
 }
 \value{
 A data frame with three columns:

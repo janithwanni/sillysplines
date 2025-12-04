@@ -13,6 +13,7 @@
 #'   file containing a list/array of coordinate pairs. Optional if `coord` is
 #'   supplied.
 #' @param n_samples Integer; number of synthetic 2D points to generate.
+#' @param seed Integer; Random seed to be used for generating dataset
 #'
 #' @return A data frame with three columns:
 #'   \describe{
@@ -44,7 +45,8 @@
 create_data <- function(
   coord_filepath = NULL,
   coord = NULL,
-  n_samples = 10000
+  n_samples = 10000,
+  seed = 1835
 ) {
   # Load coordinates from file or object
   if (!is.null(coord_filepath)) {
@@ -64,12 +66,13 @@ create_data <- function(
   }
 
   # Generate dataset
-  df <- data.frame(
-    x = stats::runif(n_samples, min = min(coord[, 1]), max = max(coord[, 1])),
-    y = stats::runif(n_samples, min = min(coord[, 2]), max = max(coord[, 2]))
+  df <- withr::with_seed(
+    seed,
+    data.frame(
+      x = stats::runif(n_samples, min = min(coord[, 1]), max = max(coord[, 1])),
+      y = stats::runif(n_samples, min = min(coord[, 2]), max = max(coord[, 2]))
+    )
   )
-
-  # df$class <- classify_points(df$x, df$y, coord)
   # Interpolate boundary y at each x
   # approxfun does piecewise linear interpolation
   boundary_fn <- stats::approxfun(

@@ -73,17 +73,6 @@ create_data <- function(
       y = stats::runif(n_samples, min = min(coord[, 2]), max = max(coord[, 2]))
     )
   )
-  # Interpolate boundary y at each x
-  # approxfun does piecewise linear interpolation
-  boundary_fn <- stats::approxfun(
-    x = coord[, 1],
-    y = coord[, 2],
-    rule = 2 # extend linearly beyond boundary if needed
-  )
-
-  # Compute class: above the boundary == 1
-  boundary_y <- boundary_fn(df$x)
-  df$class <- ifelse(df$y > boundary_y, "Above", "Below")
-
+  df$class <- classify_boundary(df, coord)
   return(df)
 }

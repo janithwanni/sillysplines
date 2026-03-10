@@ -1,5 +1,3 @@
-# WARN: LLM Generated Code
-
 #' Classify Points Relative to a Boundary Line
 #'
 #' @description

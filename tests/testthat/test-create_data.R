@@ -1,6 +1,3 @@
-# test-create_data.R
-# WARN: LLM Generated Code
-
 library(jsonlite)
 
 describe("create_data() with piecewise decision boundary", {

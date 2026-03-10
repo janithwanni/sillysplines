@@ -1,4 +1,3 @@
-# WARN: LLM Generated code
 #' Create a 2D Synthetic Dataset With Class Labels
 #'
 #' Generates a synthetic two-dimensional dataset using random uniform values.

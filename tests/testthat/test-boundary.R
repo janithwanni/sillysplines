@@ -1,5 +1,3 @@
-# WARN: LLM Generated Code
-
 test_that("classify_boundary works with basic linear boundary", {
   data <- data.frame(
     x = c(1, 2, 3, 4, 5),

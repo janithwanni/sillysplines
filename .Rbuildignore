@@ -5,3 +5,7 @@
 ^adr.md$
 ^.*\.sh$
 ^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$

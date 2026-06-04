@@ -6,6 +6,9 @@
 
 ## Citation
 
+Source:
+[`DESCRIPTION`](https://github.com/janithwanni/sillysplines/blob/main/DESCRIPTION)
+
 Last F (2026). *sillysplines: What the Package Does (One Line, Title
 Case)*. R package version 0.0.1,
 <https://janithwanni.github.io/sillysplines/>.

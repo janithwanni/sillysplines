@@ -10,6 +10,7 @@ You can install the development version of sillysplines from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("janithwanni/sillysplines")
 ```
@@ -21,6 +22,7 @@ You start off by running
 from the package.
 
 ``` r
+
 library(sillysplines)
 sillysplines()
 ```
@@ -36,5 +38,6 @@ Then it’s a matter of using the create_data function to create a dataset
 of your size
 
 ``` r
+
 create_data(coord_filepath="<yourfilenamehere.json>", n_samples = 1000)
 ```

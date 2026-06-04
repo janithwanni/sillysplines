@@ -13,6 +13,7 @@ create_data(
   coord_filepath = NULL,
   coord = NULL,
   n_samples = 10000,
+  type = "uniform",
   seed = 1835
 )
 ```
@@ -32,6 +33,11 @@ create_data(
 - n_samples:
 
   Integer; number of synthetic 2D points to generate.
+
+- type:
+
+  String; How should the points be generated. Can be either 'uniform' or
+  'grid'
 
 - seed:
 

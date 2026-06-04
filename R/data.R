@@ -11,6 +11,7 @@
 #' @param coord_filepath A character string specifying a file path to a JSON
 #'   file containing a list/array of coordinate pairs. Optional if `coord` is
 #'   supplied.
+#' @param type String; How should the points be generated. Can be either 'uniform' or 'grid'
 #' @param n_samples Integer; number of synthetic 2D points to generate.
 #' @param seed Integer; Random seed to be used for generating dataset
 #'
@@ -45,6 +46,7 @@ create_data <- function(
   coord_filepath = NULL,
   coord = NULL,
   n_samples = 10000,
+  type = "uniform",
   seed = 1835
 ) {
   # Load coordinates from file or object
@@ -64,14 +66,27 @@ create_data <- function(
     stop("Coordinates must have exactly two columns (x,y).")
   }
 
+  min_x <- min(coord[, 1])
+  max_x <- max(coord[, 1])
+  min_y <- min(coord[, 2])
+  max_y <- max(coord[, 2])
+
   # Generate dataset
-  df <- withr::with_seed(
-    seed,
-    data.frame(
-      x = stats::runif(n_samples, min = min(coord[, 1]), max = max(coord[, 1])),
-      y = stats::runif(n_samples, min = min(coord[, 2]), max = max(coord[, 2]))
+  if (type == "uniform") {
+    df <- withr::with_seed(
+      seed,
+      data.frame(
+        x = stats::runif(n_samples, min = min_x, max = max_x),
+        y = stats::runif(n_samples, min = min_x, max = max_x)
+      )
     )
-  )
+  } else if (type == "grid") {
+    df <- expand.grid(
+      x = seq(min_x, max_x, length.out = floor(sqrt(n_samples))),
+      y = seq(min_y, max_y, length.out = floor(sqrt(n_samples)))
+    )
+    colnames(df) <- c("x", "y")
+  }
   df$class <- classify_boundary(df, coord)
   return(df)
 }

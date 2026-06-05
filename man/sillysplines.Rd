@@ -16,3 +16,8 @@ sillysplines(width = 640, height = 640, elementId = "app")
 \description{
 This creates a simple htmlwidget to be used
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+ sillysplines()
+\dontshow{\}) # examplesIf}
+}

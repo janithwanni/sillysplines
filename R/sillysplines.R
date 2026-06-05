@@ -9,6 +9,8 @@
 #' @import htmlwidgets
 #'
 #' @export
+#' @examplesIf interactive()
+#'  sillysplines()
 sillysplines <- function(
   width = 640,
   height = 640,

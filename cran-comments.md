@@ -1,5 +1,28 @@
+# sillysplines 1.0.0
+
+This is a new package
+
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+> devtools::check()
 
-* This is a new release.
+── R CMD check results ───────────────── sillysplines 1.0.0 ────
+Duration: 30.6s
+
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+
+> R CMD CHECK --as-cran results
+
+* DONE
+
+Status: 1 NOTE
+
+The NOTE is to show the maintainer email and name.
+* checking CRAN incoming feasibility ... [4s/22s] NOTE
+Maintainer: ‘Janith Wanniarachchi <janithcwanni@gmail.com>’
+
+New submission
+
+> rhub::rhub_check()
+
+

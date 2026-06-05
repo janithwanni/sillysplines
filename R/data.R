@@ -30,7 +30,7 @@
 #' Otherwise, the point is labelled \code{0}.
 #'
 #' @examples
-#' \dontrun{
+#'
 #' coords <- matrix(c(0.2, 0.3,
 #'                    0.4, 0.5,
 #'                    0.6, 0.7), ncol = 2, byrow = TRUE)
@@ -38,7 +38,7 @@
 #' set.seed(1)
 #' df <- create_data(coord = coords, n_samples = 500)
 #' head(df)
-#' }
+#'
 #'
 #' @importFrom jsonlite fromJSON
 #' @export

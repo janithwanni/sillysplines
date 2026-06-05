@@ -70,7 +70,7 @@ Otherwise, the point is labelled `0`.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+
 coords <- matrix(c(0.2, 0.3,
                    0.4, 0.5,
                    0.6, 0.7), ncol = 2, byrow = TRUE)
@@ -78,5 +78,12 @@ coords <- matrix(c(0.2, 0.3,
 set.seed(1)
 df <- create_data(coord = coords, n_samples = 500)
 head(df)
-} # }
+#>           x         y class
+#> 1 0.5833290 0.2026021 Below
+#> 2 0.2218693 0.2220578 Below
+#> 3 0.5741707 0.5829402 Below
+#> 4 0.5831354 0.5024238 Below
+#> 5 0.2361910 0.3709667 Above
+#> 6 0.5364458 0.3487250 Below
+
 ```

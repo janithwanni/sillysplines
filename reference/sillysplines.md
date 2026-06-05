@@ -21,3 +21,11 @@ sillysplines(width = 640, height = 640, elementId = "app")
 - elementId:
 
   The id to be used for the container element
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+ sillysplines()
+}
+```

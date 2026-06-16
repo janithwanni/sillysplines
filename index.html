@@ -57,20 +57,22 @@
 </h2>
 <p>You can install the development version of sillysplines from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"janithwanni/sillysplines"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"janithwanni/sillysplines"</span><span class="op">)</span></span></code></pre></div>
+<p>You can install the CRAN version by running</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>You start off by running <code><a href="reference/sillysplines.html">sillysplines()</a></code> from the package.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://janithwanni.github.io/sillysplines/">sillysplines</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/sillysplines.html">sillysplines</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>This should open up an HTML widget that shows a box containing an initial spline design. You can add points by clicking on intermediate areas, and you can drag points by clicking on the nodes.</p>
 <p>Once done you can click Download boundary to get a JSON file containing the coordinates.</p>
 <p>Then it’s a matter of using the create_data function to create a dataset of your size</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/create_data.html">create_data</a></span><span class="op">(</span>coord_filepath<span class="op">=</span><span class="st">"&lt;yourfilenamehere.json&gt;"</span>, n_samples <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>

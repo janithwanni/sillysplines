@@ -16,8 +16,13 @@ You can install the development version of sillysplines from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
 pak::pak("janithwanni/sillysplines")
+```
+
+You can install the CRAN version by running
+
+``` r
+install.packages("pak")
 ```
 
 ## Example

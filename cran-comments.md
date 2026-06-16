@@ -25,4 +25,6 @@ New submission
 
 > rhub::rhub_check()
 
+Checks for linux, mac, windows all passed, details at:
 
+https://github.com/janithwanni/sillysplines/actions/runs/27004229042

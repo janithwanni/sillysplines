@@ -11,3 +11,4 @@
 ^\.github$
 ^.*\.json$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$

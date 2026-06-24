@@ -24,7 +24,8 @@ renderSillysplines(expr, env = parent.frame(), quoted = FALSE)
 
 - expr:
 
-  An expression that generates a sillysplines
+  An expression that generates an HTML widget (or a
+  [promise](https://rstudio.github.io/promises/) of an HTML widget).
 
 - env:
 
@@ -35,3 +36,18 @@ renderSillysplines(expr, env = parent.frame(), quoted = FALSE)
   Is `expr` a quoted expression (with
   [`quote()`](https://rdrr.io/r/base/substitute.html))? This is useful
   if you want to save an expression in a variable.
+
+## Examples
+
+``` r
+library(shiny)
+app <- shinyApp(
+  ui = fluidPage(sillysplinesOutput('splines')),
+  server = function(input, output) {
+    splines_widget <- sillysplines()
+    output$splines= renderSillysplines(splines_widget)
+  }
+)
+
+if (interactive()) app
+```

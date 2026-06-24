@@ -8,11 +8,12 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
-    htmltools,
     htmlwidgets,
     jsonlite,
     withr
 Suggests: 
+    rlang,
+    shiny,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://janithwanni.github.io/sillysplines/, https://github.com/janithwanni/sillysplines

@@ -37,6 +37,17 @@ renderSillysplines(expr, env = parent.frame(), quoted = FALSE)
   [`quote()`](https://rdrr.io/r/base/substitute.html))? This is useful
   if you want to save an expression in a variable.
 
+  @return Returns a
+  [`htmlwidgets::shinyRenderWidget`](https://rdrr.io/pkg/htmlwidgets/man/htmlwidgets-shiny.html)
+  to be used in the server section of a shiny app to connect the
+  `sillysplinesOutput` defined above.
+
+## Value
+
+Returns an
+[`htmlwidgets::shinyWidgetOutput`](https://rdrr.io/pkg/htmlwidgets/man/htmlwidgets-shiny.html)
+to be used within the UI of a shiny app.
+
 ## Examples
 
 ``` r

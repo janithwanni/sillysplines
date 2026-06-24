@@ -12,6 +12,9 @@
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
 #'   is useful if you want to save an expression in a variable.
 #'
+#' @return Returns an `htmlwidgets::shinyWidgetOutput` to be used within the UI
+#' of a shiny app.
+#'
 #' @rdname sillysplines-shiny
 #'
 #' @export
@@ -36,9 +39,17 @@ sillysplinesOutput <- function(outputId, width = '100%', height = '400px') {
   )
 }
 
-# use expr description from htmlwidgets to avoid bad inherit params code
+#' Connect sillysplines with the sillysplinesOutput
+#'
 #' @param expr An expression that generates an HTML widget (or a
 #'   [promise](https://rstudio.github.io/promises/) of an HTML widget).
+#' @param env The environment in which to evaluate \code{expr}.
+#' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
+#'   is useful if you want to save an expression in a variable.
+#'
+#'  @return Returns a `htmlwidgets::shinyRenderWidget` to be used in the server section
+#'  of a shiny app to connect the `sillysplinesOutput` defined above.
+#'
 #' @rdname sillysplines-shiny
 #' @export
 renderSillysplines <- function(expr, env = parent.frame(), quoted = FALSE) {

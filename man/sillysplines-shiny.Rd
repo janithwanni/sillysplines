@@ -22,7 +22,14 @@ string and have \code{'px'} appended.}
 \item{env}{The environment in which to evaluate \code{expr}.}
 
 \item{quoted}{Is \code{expr} a quoted expression (with \code{quote()})? This
-is useful if you want to save an expression in a variable.}
+is useful if you want to save an expression in a variable.
+
+@return Returns a \code{htmlwidgets::shinyRenderWidget} to be used in the server section
+of a shiny app to connect the \code{sillysplinesOutput} defined above.}
+}
+\value{
+Returns an \code{htmlwidgets::shinyWidgetOutput} to be used within the UI
+of a shiny app.
 }
 \description{
 Output and render functions for using sillysplines within Shiny

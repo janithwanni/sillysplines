@@ -20,7 +20,7 @@
 #'   \describe{
 #'     \item{x}{Random uniform x-coordinate}
 #'     \item{y}{Random uniform y-coordinate}
-#'     \item{class}{Binary class label (0 or 1)}
+#'     \item{class}{Binary class label ("Above" or "Below")}
 #'   }
 #'
 #' @details
@@ -100,5 +100,49 @@ create_data <- function(
   }
   else
     df$class <- bnd$preds
+  return(df)
+}
+
+#' Add noise variables to create high-dimensional data
+#'
+#' This function generates samples from a uniform distribution to be
+#' used as noise variables. This can be used to assess the effect of
+#' high-dimensions on a model fit, and explainers.
+#'
+#' @param df A matrix or data frame with three columns (x, y, class).
+#' @param n_vars Integer; number of additional variables to generate.
+#'
+#' @return A data frame with three+n_vars columns, like:
+#'   \describe{
+#'     \item{x1}{Random uniform coordinate}
+#'     \item{x2}{Random uniform coordinate}
+#'     \item{x3}{From the original data x}
+#'     \item{x4}{From the original data y}
+#'     \item{class}{Binary class label ("Above" or "Below")}
+#'   }
+#'
+#' @examples
+#'
+#' coords <- matrix(c(0.2, 0.3,
+#'                    0.4, 0.5,
+#'                    0.6, 0.7), ncol = 2, byrow = TRUE)
+#'
+#' df <- create_data(coord = coords, n_samples = 500, seed = 717)
+#'
+#' df <- add_noise_vars(df, 2)
+#' head(df)
+#'
+#' @export
+add_noise_vars <- function(data, n_vars = 2) {
+  n <- nrow(data)
+  df <- data.frame(x1 = stats::runif(n,
+                                     min(c(data$x, data$y)),
+                                     max(c(data$x, data$y))))
+  for (i in 2:n_vars)
+    df <- cbind(df, stats::runif(n,
+                                 min(c(data$x, data$y)),
+                                 max(c(data$x, data$y))))
+  df <- cbind(df, data)
+  colnames(df) <- c(paste0("x", 1:(n_vars+2)), "class")
   return(df)
 }

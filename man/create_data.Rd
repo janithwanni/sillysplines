@@ -34,7 +34,7 @@ A data frame with three columns:
 \describe{
 \item{x}{Random uniform x-coordinate}
 \item{y}{Random uniform y-coordinate}
-\item{class}{Binary class label (0 or 1)}
+\item{class}{Binary class label ("Above" or "Below")}
 }
 }
 \description{
@@ -57,8 +57,7 @@ coords <- matrix(c(0.2, 0.3,
                    0.4, 0.5,
                    0.6, 0.7), ncol = 2, byrow = TRUE)
 
-set.seed(1)
-df <- create_data(coord = coords, n_samples = 500)
+df <- create_data(coord = coords, n_samples = 500, seed = 717)
 head(df)
 
 

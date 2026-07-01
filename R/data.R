@@ -146,3 +146,46 @@ add_noise_vars <- function(data, n_vars = 2) {
   colnames(df) <- c(paste0("x", 1:(n_vars+2)), "class")
   return(df)
 }
+
+#' Trim data to be have correlated predictors
+#'
+#' This function removes points outside of a elliptical region
+#'
+#' @param df A matrix or data frame with three columns (x, y, class).
+#' @param r Numeric; Correlation defining the shape, between -1, 1; default 0.6
+#'
+#' @return A data frame with three+n_vars columns, like:
+#'   \describe{
+#'     \item{x}{Random uniform coordinate}
+#'     \item{y}{Random uniform coordinate}
+#'     \item{class}{Binary class label ("Above" or "Below")}
+#'   }
+#'
+#' @examples
+#'
+#' coords <- matrix(c(0.2, 0.3,
+#'                    0.4, 0.5,
+#'                    0.6, 0.7), ncol = 2, byrow = TRUE)
+#'
+#' df <- create_data(coord = coords, n_samples = 500, seed = 717)
+#'
+#' df <- trim_shape(df)
+#' plot(df$x, df$y, col=ifelse(df$class == "Above", "red", "yellow"))
+#'
+#' @export
+trim_shape <- function(data, r = 0.6) {
+  n <- nrow(data)
+
+  if (abs(r) > 0.9)
+    stop("cor needs to be within (-1, 1).")
+
+  # Data needs to be standardized to make this work
+  f_std <- function(x) (x-mean(x))/(sd(x)) # assumes no missings!
+  df <- apply(data[,1:2], 2, f_std)
+  # Compute mahalanobis distance
+  vc <- matrix(c(1, r, r, 1), byrow=TRUE, ncol=2)
+  dst <- mahalanobis(df, c(0, 0), vc)
+
+  data <- data[dst<4,]
+  return(data)
+}

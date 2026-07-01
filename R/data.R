@@ -11,10 +11,11 @@
 #' @param coord_filepath A character string specifying a file path to a JSON
 #'   file containing a list/array of coordinate pairs. Optional if `coord` is
 #'   supplied.
-#' @param type String; How should the points be generated. Can be either 'uniform' or 'grid'
+#' @param type String; How should the points be generated. Can be either 'uniform' (default), 'normal', or 'grid'
 #' @param n_samples Integer; number of synthetic 2D points to generate.
-#' @param seed Integer; Random seed to be used for generating dataset
+#' @param seed Integer; Random seed to be used for generating dataset.
 #' @param gap Numeric; Value close to 0 defining gap at the boundary, less than 0.2
+#' @param r Numeric; Correlation for generating normal sample, between (-0.9, 0.9), default 0.
 #'
 #' @return A data frame with three columns:
 #'   \describe{
@@ -48,7 +49,8 @@ create_data <- function(
   n_samples = 10000,
   type = "uniform",
   seed = 1835,
-  gap = 0
+  gap = 0,
+  r = 0
 ) {
   # Load coordinates from file or object
   if (!is.null(coord_filepath)) {
@@ -71,6 +73,10 @@ create_data <- function(
     stop("Assuming the data is scaled between -1, 1, the gap at the boundary should be less than 0.2.")
   }
 
+  if (abs(r) > 0.9) {
+    stop("Correlation (r) needs to be between -0.9 and 0.9.")
+  }
+
   min_x <- min(coord[, 1])
   max_x <- max(coord[, 1])
   min_y <- min(coord[, 2])
@@ -82,9 +88,19 @@ create_data <- function(
       seed,
       data.frame(
         x = stats::runif(n_samples, min = min_x, max = max_x),
-        y = stats::runif(n_samples, min = min_x, max = max_x)
+        y = stats::runif(n_samples, min = min_y, max = max_y)
       )
     )
+  } else if (type == "normal") {
+    x <- matrix(rnorm(n_samples * 2), ncol = 2)
+    vc <- matrix(c(1, r, r, 1), byrow=TRUE, ncol=2)
+    ev <- eigen(vc)
+    vcsqrt <- diag(sqrt(ev$values)) %*% t(ev$vectors)
+    x <- x %*% vcsqrt
+    df <- data.frame(x = (x[,1] - min(x[,1]))/(max(x[,1]) - min(x[,1])),
+                     y = (x[,2] - min(x[,2]))/(max(x[,2]) - min(x[,2])))
+    df <- data.frame(x = (df[,1]*(max_x - min_x) + min_x),
+                     y = (df[,2]*(max_y - min_y) + min_y))
   } else if (type == "grid") {
     df <- expand.grid(
       x = seq(min_x, max_x, length.out = floor(sqrt(n_samples))),

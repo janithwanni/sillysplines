@@ -10,7 +10,8 @@ create_data(
   n_samples = 10000,
   type = "uniform",
   seed = 1835,
-  gap = 0
+  gap = 0,
+  r = 0
 )
 }
 \arguments{
@@ -23,11 +24,13 @@ threshold coordinates. Optional if \code{coord_filepath} is supplied.}
 
 \item{n_samples}{Integer; number of synthetic 2D points to generate.}
 
-\item{type}{String; How should the points be generated. Can be either 'uniform' or 'grid'}
+\item{type}{String; How should the points be generated. Can be either 'uniform' (default), 'normal', or 'grid'}
 
-\item{seed}{Integer; Random seed to be used for generating dataset}
+\item{seed}{Integer; Random seed to be used for generating dataset.}
 
 \item{gap}{Numeric; Value close to 0 defining gap at the boundary, less than 0.2}
+
+\item{r}{Numeric; Correlation for generating normal sample, between (-0.9, 0.9), default 0.}
 }
 \value{
 A data frame with three columns:

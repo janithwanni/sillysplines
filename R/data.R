@@ -14,6 +14,7 @@
 #' @param type String; How should the points be generated. Can be either 'uniform' or 'grid'
 #' @param n_samples Integer; number of synthetic 2D points to generate.
 #' @param seed Integer; Random seed to be used for generating dataset
+#' @param gap Numeric; Value close to 0 defining gap at the boundary, less than 0.2
 #'
 #' @return A data frame with three columns:
 #'   \describe{
@@ -35,8 +36,7 @@
 #'                    0.4, 0.5,
 #'                    0.6, 0.7), ncol = 2, byrow = TRUE)
 #'
-#' set.seed(1)
-#' df <- create_data(coord = coords, n_samples = 500)
+#' df <- create_data(coord = coords, n_samples = 500, seed = 717)
 #' head(df)
 #'
 #'
@@ -47,7 +47,8 @@ create_data <- function(
   coord = NULL,
   n_samples = 10000,
   type = "uniform",
-  seed = 1835
+  seed = 1835,
+  gap = 0
 ) {
   # Load coordinates from file or object
   if (!is.null(coord_filepath)) {
@@ -64,6 +65,10 @@ create_data <- function(
 
   if (ncol(coord) != 2) {
     stop("Coordinates must have exactly two columns (x,y).")
+  }
+
+  if (gap > 0.2) {
+    stop("Assuming the data is scaled between -1, 1, the gap at the boundary should be less than 0.2.")
   }
 
   min_x <- min(coord[, 1])
@@ -87,6 +92,13 @@ create_data <- function(
     )
     colnames(df) <- c("x", "y")
   }
-  df$class <- classify_boundary(df, coord)
+  bnd <- classify_boundary(df, coord)
+  if (gap > 0) {
+    drop_these <- which(abs(bnd$advantage) < gap)
+    df$class <- bnd$preds
+    df <- df[-drop_these,]
+  }
+  else
+    df$class <- bnd$preds
   return(df)
 }

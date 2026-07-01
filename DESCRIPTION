@@ -1,6 +1,6 @@
 Package: sillysplines
 Title: Linear Splines to Generate Decision Boundaries
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person("Janith", "Wanniarachchi", , "janithcwanni@gmail.com", role = c("aut", "cre", "cph"))
 Description: Create two dimensional datasets with decision boundaries set by linear splines. An HTML widget enables users to draw the splines on a web page and generate a JSON file that can be used to generate datasets.

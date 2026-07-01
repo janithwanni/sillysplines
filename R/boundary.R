@@ -93,6 +93,8 @@ classify_boundary <- function(
   # Compute class: above the boundary == first class
   boundary_y <- boundary_fn(data$x)
   preds <- ifelse(data$y > boundary_y, classes[1], classes[2])
+  advantage <- data$y-boundary_y
 
-  return(preds)
+  return(list(preds=preds, advantage=advantage))
 }
+

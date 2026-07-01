@@ -9,7 +9,8 @@ create_data(
   coord = NULL,
   n_samples = 10000,
   type = "uniform",
-  seed = 1835
+  seed = 1835,
+  gap = 0
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ threshold coordinates. Optional if \code{coord_filepath} is supplied.}
 \item{type}{String; How should the points be generated. Can be either 'uniform' or 'grid'}
 
 \item{seed}{Integer; Random seed to be used for generating dataset}
+
+\item{gap}{Numeric; Value close to 0 defining gap at the boundary, less than 0.2}
 }
 \value{
 A data frame with three columns:
